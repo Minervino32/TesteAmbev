@@ -1,3 +1,4 @@
+using Application.Services;
 using Domain.Interfaces;
 using Infrasctructure.Context;
 using Infrasctructure.Queues;
@@ -39,10 +40,12 @@ builder.Services.AddDbContext<TesteAmbevContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("local");
     options.UseSqlServer(connectionString);
+    options.LogTo(Console.WriteLine, LogLevel.None);
 }, ServiceLifetime.Singleton);
 
 //Inject App Dependencies
 builder.Services.AddSingleton<IOrderService, Application.Services.OrderService>();
+builder.Services.AddSingleton<IOrderNotificationService, OrderNotificationService>();
 
 //Inject App Repositories/Data Dependencies
 builder.Services.AddSingleton<IOrderRepository, OrderRepository>();

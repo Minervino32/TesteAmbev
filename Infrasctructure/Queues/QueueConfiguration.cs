@@ -14,6 +14,12 @@ namespace Infrasctructure.Queues
                                      exclusive: false,
                                      autoDelete: false,
                                      arguments: null);
+
+                channel.QueueDeclare(queue: "orders_processed",
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
             }
         }
     }

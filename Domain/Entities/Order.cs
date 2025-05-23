@@ -12,6 +12,7 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string? ExternalId { get; set; }
+        public string? Requestor { get; set; }
         public DateTime DateCreated { get; set; }
         public decimal Total { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Imported;

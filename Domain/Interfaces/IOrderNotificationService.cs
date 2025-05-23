@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IOrderRepository
+    public interface IOrderNotificationService
     {
-        Task<Order> AddAsync(Order entity);
-        Task<bool> GetProcessed(string id,string requestor);
+        Task PublishProcessedOrder(Order order);
     }
 }

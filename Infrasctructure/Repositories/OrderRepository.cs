@@ -27,9 +27,9 @@ namespace Infrasctructure.Repositories
             return newOrder.Entity;
         }
 
-        public async Task<bool> GetProcessed(string id)
+        public async Task<bool> GetProcessed(string id, string requestor)
         {
-            return await _context.Orders.AnyAsync(p => p.ExternalId == id && p.Status == OrderStatus.Processed);
+            return await _context.Orders.AnyAsync(p => p.ExternalId == id && p.Status == OrderStatus.Processed && p.Requestor == requestor);
         }
     }
 }

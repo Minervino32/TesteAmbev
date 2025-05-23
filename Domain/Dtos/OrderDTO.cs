@@ -11,6 +11,7 @@ namespace Domain.Dtos
     public class OrderDTO
     {
         public required string Id { get; set; }
+        public required string Requestor { get; set; }
 
         [NotMapped]
         public required List<Product> Products { get; set; } = new List<Product>();

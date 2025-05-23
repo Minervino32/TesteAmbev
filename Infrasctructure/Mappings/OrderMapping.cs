@@ -15,6 +15,7 @@ namespace Infrasctructure.Mappings
         {
             builder.HasKey(u => u.Id);
             builder.Property(u => u.ExternalId);
+            builder.Property(u => u.Requestor).IsRequired();
             builder.Property(u => u.Total).IsRequired();
             builder.Property(u => u.DateCreated).IsRequired();
             builder.Property(u => u.Status).IsRequired();
