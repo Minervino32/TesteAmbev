@@ -33,7 +33,7 @@ namespace Application.Services
                 DateCreated = DateTime.UtcNow,
                 Total = total,
                 Status = OrderStatus.Processed,
-                Products = orderDto.Products // Ensure Products is properly initialized  
+                Products = orderDto.Products
             };
 
             Order newOrder = await _orderRepository.AddAsync(order);
