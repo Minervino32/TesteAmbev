@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: customerdb
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "My!P@ssw0rd1"
+      ACCEPT_EULA: "Y"
+    networks:
+      - app_network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "admin"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

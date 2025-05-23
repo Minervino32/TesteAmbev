@@ -1,16 +1,19 @@
 ﻿using Domain.Dtos;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Services
 {
     public class OrderService : IOrderService
     {
+        private readonly ILogger<OrderService> _logger;
         private readonly IOrderRepository _orderRepository;
 
-        public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository, ILogger<OrderService> logger)
         {
             _orderRepository = orderRepository;
+            _logger = logger;
         }
 
         public async Task ProcessOrder(OrderDTO orderDto)
@@ -18,18 +21,18 @@ namespace Application.Services
             bool isProcessed = await _orderRepository.GetProcessed(orderDto.Id);
             if (isProcessed)
             {
-                throw new Exception("Order already processed");
+                _logger.LogInformation("Order {id} already processed", orderDto.Id);
+                throw new Exception($"Order {orderDto.Id} already processed");
             }
 
-            orderDto.Status = OrderStatus.Processed;
-            orderDto.Total = orderDto.Products.Sum(p => p.Price * p.Quantity);
+            decimal total = orderDto.Products.Sum(p => p.Price * p.Quantity);
 
             Order order = new()
             {
                 ExternalId = orderDto.Id,
-                DateCreated = orderDto.DateCreated,
-                Total = orderDto.Total,
-                Status = orderDto.Status,
+                DateCreated = DateTime.UtcNow,
+                Total = total,
+                Status = OrderStatus.Processed,
                 Products = orderDto.Products // Ensure Products is properly initialized  
             };
 
