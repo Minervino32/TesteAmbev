@@ -14,9 +14,18 @@ namespace Infrasctructure.Mappings
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasKey(u => u.Id);
+            builder.Property(u => u.ExternalId);
             builder.Property(u => u.Total).IsRequired();
             builder.Property(u => u.DateCreated).IsRequired();
             builder.Property(u => u.Status).IsRequired();
+
+            builder.HasIndex(u => u.Id)
+                .IsUnique()
+                .HasDatabaseName("IX_Order_Id");
+
+            builder.HasIndex(u => u.ExternalId)
+                .IsUnique()
+                .HasDatabaseName("IX_Order_ExternalId");
         }
     }
 }
