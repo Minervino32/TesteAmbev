@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{8CA0A5E5-7420-4D2E-AD97-84E6B619EC0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{2498CAF1-8678-499D-B1FC-EBB5FD0D3397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrasctructure", "Infrasctructure\Infrasctructure.csproj", "{D865684B-F709-4128-A818-F9C229A96C23}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA0A5E5-7420-4D2E-AD97-84E6B619EC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA0A5E5-7420-4D2E-AD97-84E6B619EC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA0A5E5-7420-4D2E-AD97-84E6B619EC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA0A5E5-7420-4D2E-AD97-84E6B619EC0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2498CAF1-8678-499D-B1FC-EBB5FD0D3397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2498CAF1-8678-499D-B1FC-EBB5FD0D3397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2498CAF1-8678-499D-B1FC-EBB5FD0D3397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2498CAF1-8678-499D-B1FC-EBB5FD0D3397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D865684B-F709-4128-A818-F9C229A96C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D865684B-F709-4128-A818-F9C229A96C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D865684B-F709-4128-A818-F9C229A96C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D865684B-F709-4128-A818-F9C229A96C23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
