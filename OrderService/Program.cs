@@ -14,14 +14,12 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMQ"));
 builder.Services.AddSingleton(serviceProvider =>
 {
-    var rabbitConfig = serviceProvider.GetRequiredService<IOptions<RabbitMqSettings>>().Value;
-
     var factory = new ConnectionFactory()
     {
-        HostName = rabbitConfig.HostName,
-        Port = rabbitConfig.Port,
-        UserName = rabbitConfig.UserName,
-        Password = rabbitConfig.Password
+        HostName = Environment.GetEnvironmentVariable("RABBITMQ_HOST") ?? "rabbitmq",
+        Port = int.Parse(Environment.GetEnvironmentVariable("RABBITMQ_PORT") ?? "5672"),
+        UserName = Environment.GetEnvironmentVariable("RABBITMQ_USER") ?? "admin",
+        Password = Environment.GetEnvironmentVariable("RABBITMQ_PASS") ?? "admin"
     };
 
     var connection = factory.CreateConnection();
@@ -29,7 +27,7 @@ builder.Services.AddSingleton(serviceProvider =>
 
     //Queue configuration
     QueueConfiguration.ConfigureQueues(channel);
-
+    Console.WriteLine("Conectado ao RabbitMQ!");
     return channel;
 });
 

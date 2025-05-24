@@ -3,12 +3,28 @@ version: '3.9'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: customerdb
+    container_name: sqlserver
     ports:
       - "1433:1433"
     environment:
       SA_PASSWORD: "My!P@ssw0rd1"
       ACCEPT_EULA: "Y"
+    networks:
+      - app_network
+
+  orderservice:
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+    container_name: orderservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=admin
+      - RABBITMQ_PASS=admin
+    entrypoint: ["dotnet", "OrderService.dll"]
     networks:
       - app_network
 
@@ -26,4 +42,5 @@ services:
 
 networks:
   app_network:
+    name: app_network
     driver: bridge
